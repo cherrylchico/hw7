@@ -20,7 +20,10 @@ uv run uvicorn main:app --reload
 ```
 
 4. In another terminal, run request.py to make a prediction for
-data `sample.json` and model `model_rf.pickle`
+data `sample.json` using `model_rf.pickle`
 ```
 uv run python request.py
 ```
+The request should return the predicted probability.
+
+1. Stop the server by pressing `CTRL` + `C` in the server terminal.
