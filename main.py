@@ -1,28 +1,33 @@
 import joblib
 import json
+import numpy as np
 from fastapi import FastAPI, HTTPException  
-from pydantic import BaseModel
 from pandas import json_normalize
-
-class Item(BaseModel):
-    "Base Item for Prediction"
-    value: str
 
 app = FastAPI()
 
 @app.post("/predict")
-aysnc def predict(sample_input: Item):
-    """
-    Predict from Random Forest Model in Hw5 given a Json Input
+async def predict(sample_input: dict):
+    """Predict endpoint.
+
+    Accepts a JSON object representing a single record in json format.
+
+    Returns: {"prediction": <value>} where <value> is the model's output for the record.
     """
 
     try:
+        # Load model
         model = joblib.load("model_rf.pickle")
-        json_data = json.loads(sample_input)
-        X_new = json_normalize(json_data)
-        prediction = model.predict(X_new)
-        return {"prediction": prediction[0][0]}
-    except HTTPException:
-        raise {"message":"model prediction failed" }
-    
 
+        #Convert input into a Dataframe
+        X_new = json_normalize([sample_input])
+
+        # Make prediction, note that input is a dataframe
+        prediction = model.predict(X_new)
+
+        # Get the first (and should be only) prediction
+        pred_value = prediction.iloc[0,0]
+        return {"prediction": pred_value}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
