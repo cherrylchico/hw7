@@ -9,4 +9,18 @@ dependencies = [
     "joblib>=1.5.2",
     "pandas>=2.3.3",
     "pydantic>=2.12.4",
+    "uvicorn>=0.38.0",
+]
+
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.0.1",
 ]
