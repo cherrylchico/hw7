@@ -26,7 +26,7 @@ async def predict(sample_input: dict):
         prediction = model.predict(X_new)
 
         # Get the first (and should be only) prediction
-        pred_value = prediction.iloc[0,0]
+        pred_value = prediction.iloc[0,1]
         return {"prediction": pred_value}
 
     except Exception as e:
