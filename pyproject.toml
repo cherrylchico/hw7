@@ -1,0 +1,12 @@
+[project]
+name = "hw7"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.121.1",
+    "joblib>=1.5.2",
+    "pandas>=2.3.3",
+    "pydantic>=2.12.4",
+]
