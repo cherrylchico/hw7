@@ -26,4 +26,4 @@ uv run python request.py
 ```
 The request should return the predicted probability.
 
-1. Stop the server by pressing `CTRL` + `C` in the server terminal.
+5. Stop the server by pressing `CTRL` + `C` in the server terminal.
