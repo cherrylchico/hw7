@@ -27,3 +27,5 @@ uv run python request.py
 The request should return the predicted probability.
 
 5. Stop the server by pressing `CTRL` + `C` in the server terminal.
+
+P.S for illustrating Pydantic data validation, when the input is not correct, run `wrong_request.py`, which uses `wrong_sample.json`.
