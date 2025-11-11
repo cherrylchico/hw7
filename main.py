@@ -1,6 +1,5 @@
 import joblib
-import json
-import numpy as np
+
 from fastapi import FastAPI, HTTPException  
 from pandas import json_normalize
 
@@ -19,10 +18,12 @@ async def predict(sample_input: dict):
         # Load model
         model = joblib.load("model_rf.pickle")
 
-        #Convert input into a Dataframe
+        #Model requires dataframe input so convert json to dataframe
         X_new = json_normalize([sample_input])
 
-        # Make prediction, note that input is a dataframe
+        #Make prediction, output is a dataframe where first row is the prediction
+        #first column prediction for 0
+        #second columb prediction for 1
         prediction = model.predict(X_new)
 
         # Get the first (and should be only) prediction
@@ -31,3 +32,5 @@ async def predict(sample_input: dict):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
+    
+
